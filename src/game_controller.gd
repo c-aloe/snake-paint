@@ -11,14 +11,13 @@ Snake gets longer and wider each time it eats food (grows)
 Issues:
 	If food is in the paint area, the grid filling stops
 		- Either don't place food in paint area, or rethink why it does this
-	If snake is wide enough, it can be in the paint area and not trigger painting by going really close to it
-		- My idea was to establish a margin area where it will trigger the reveal mechanics if snake is in it
 Features:
 	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
 	More levels
 	Menu where users can
 		- Set input controller
 		- Choose theme
+	Level completed animation - revealed image scales and centers - or allow users to interact by moving scene around, zooming in, etc.
 Code Improvements:
 	Switch to randf()
 	Make UI its own scene
@@ -176,13 +175,12 @@ func _prepare_level():
 		paint_area.free()
 		
 	# Put food down
-	$Food.new_food()
-	# make sure it's not in the paint area
+	$Food.new_food(paint_area)
 
 	
 func _set_paint_area() -> void:		
 	paint_area = paint_scene.instantiate()
-	paint_area.setup(level_data.paint_area_width, level_data.paint_area_height)
+	paint_area.setup(level_data.paint_area_width, level_data.paint_area_height, $Snake.snake_width / 2)
 	paint_area.position = Vector2(
 		random.randi_range(0, window_size.x - paint_area.width),
 		random.randi_range(45, window_size.y - paint_area.height)	# 45 allows for UI at top
@@ -215,10 +213,9 @@ func _physics_process(delta) -> void:
 			set_state(GameState.LEVEL_COMPLETE)
 
 func _check_snake_collisions() -> void:
-	# Just food for now, but will be all soon
 	if $Food.check_collision($Snake):
 		$Snake.grow()
-		$Food.new_food()
+		$Food.new_food(paint_area)
 
 func _process(delta):
 	if game_state == GameState.PLAYING:
