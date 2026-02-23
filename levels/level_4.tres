@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cyfw6wlp5p7a1"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_0djwf"]
+
+[resource]
+script = ExtResource("1_0djwf")
+paint_area_width = 120
+paint_area_height = 120
+snake_speed = 130
+snake_width = 12.0
+snake_width_growth_speed = 5.0
+challenge = "Bigger canvas, faster growth."
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

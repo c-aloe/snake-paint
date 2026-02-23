@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bnk18xdutfo8p"]
+
+[ext_resource type="Script" uid="uid://bsusnvn051u13" path="res://src/grid_cell.gd" id="1_152gs"]
+
+[node name="GridCell" type="Node2D" unique_id=1544613785]
+script = ExtResource("1_152gs")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1746101408]
+z_index = -9
+centered = false
+region_rect = Rect2(0, 0, 50, 50)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=544119473]

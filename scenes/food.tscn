@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b4v6cf8p7nev4"]
+
+[ext_resource type="Script" uid="uid://d0xyprjx734x" path="res://src/food.gd" id="1_xven1"]
+
+[node name="Food" type="Node2D" unique_id=299069466]
+script = ExtResource("1_xven1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1357303729]

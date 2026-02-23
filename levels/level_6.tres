@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dcf5h0axvsnyg"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_570it"]
+
+[resource]
+script = ExtResource("1_570it")
+paint_area_width = 200
+paint_area_height = 120
+snake_speed = 150
+snake_width = 8.0
+snake_width_growth_speed = 3.0
+challenge = "Speed and coverage"
+required_completion_percentage = 85.0
+time_limit = 60.0
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

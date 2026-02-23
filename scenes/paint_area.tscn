@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://da7er3koffqf7"]
+
+[ext_resource type="Script" uid="uid://6f6sc23mogb1" path="res://src/paint_area.gd" id="1_p1uqb"]
+
+[node name="PaintArea" type="Node2D" unique_id=1043497585]
+z_as_relative = false
+script = ExtResource("1_p1uqb")
+width = 50
+height = 50
+border_width = 3
+border_color = Color(0.261653, 0.30302396, 0.59735775, 1)
+reveal_mode_permanent = false

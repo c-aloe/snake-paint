@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cfoswgweul0ab"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_3et5p"]
+
+[resource]
+script = ExtResource("1_3et5p")
+paint_area_width = 100
+paint_area_height = 60
+snake_speed = 120
+snake_width = 10.0
+snake_width_growth_speed = 3.0
+challenge = "Cover most of the field."
+required_completion_percentage = 95.0
+metadata/_custom_type_script = "uid://dabl2n7348vfn"
