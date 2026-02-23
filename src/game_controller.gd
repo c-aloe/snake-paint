@@ -5,14 +5,14 @@ class_name GameController
 My idea is a Paint with Snake Game
 Set a box in the middle of the screen that has to be filled by the
 snake's color. Box changes shape, increases in size, etc. as levels
-progress. Ideas include revealing an image (start with permanent reveal
-and move to only showing it when the snake is currently on it)
+progress. Snake reveals an image in the paint area.
 Snake gets longer and wider each time it eats food (grows)
-	- The width should be a relative value based on level, grid_size, etc.
 	
 Issues:
 	If food is in the paint area, the grid filling stops
 		- Either don't place food in paint area, or rethink why it does this
+	If snake is wide enough, it can be in the paint area and not trigger painting by going really close to it
+		- My idea was to establish a margin area where it will trigger the reveal mechanics if snake is in it
 Features:
 	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
 	More levels
@@ -20,9 +20,15 @@ Features:
 		- Set input controller
 		- Choose theme
 Code Improvements:
+	Switch to randf()
 	Make UI its own scene
 	Make LevelManager its own scene
 	Introduce LevelSession Node (see ChatGPT)
+	Pass image in to paint area from controller
+	Emit "loaded" from paint area
+	Update paint area so that the head paints and tail removes
+		(would need an extra case for when the snake grows while its body is on the paint area)
+	Decouple paint area from snake terminology (call it circle or something instead)
 '''
 enum GameState {
 	PRE_LEVEL,
@@ -132,7 +138,7 @@ func update_ui() -> String:
 	var time_string := "%02d:%02d:%03d" % [minutes, seconds, milliseconds]
 
 	%TimeLabel.text = time_string
-	progress_bar.value = (100 - paint_area.target_percent) + paint_area.percent_filled()
+	progress_bar.value = (100 - paint_area.target_percent) + paint_area.percent_revealed()
 
 	return time_string
 	
@@ -171,6 +177,8 @@ func _prepare_level():
 		
 	# Put food down
 	$Food.new_food()
+	# make sure it's not in the paint area
+
 	
 func _set_paint_area() -> void:		
 	paint_area = paint_scene.instantiate()
@@ -200,8 +208,8 @@ func _physics_process(delta) -> void:
 		# TODO: Make this event driven? snake's move signal
 		_check_snake_collisions()
 		
-		# Mark Paint Area (if snake inside)
-		paint_area.mark_grid($Snake)
+		# Paint (if snake inside)
+		paint_area.paint($Snake)
 		
 		if paint_area.is_filled():
 			set_state(GameState.LEVEL_COMPLETE)
@@ -221,10 +229,12 @@ func _unhandled_input(event) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_H:
 			if game_state == GameState.PLAYING:
-				paint_area.mark_missing_cells()
+				paint_area.show_full_image()
 		elif event.keycode == KEY_SPACE:
 			if game_state == GameState.LEVEL_COMPLETE:
 				set_state(GameState.COUNTDOWN)
+			elif game_state == GameState.COUNTDOWN:
+				set_state(GameState.PLAYING)
 		elif event.keycode == KEY_P:
 			if game_state == GameState.PLAYING:
 				set_state(GameState.PAUSED)

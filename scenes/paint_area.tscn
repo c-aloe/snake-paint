@@ -9,4 +9,8 @@ width = 50
 height = 50
 border_width = 3
 border_color = Color(0.261653, 0.30302396, 0.59735775, 1)
-reveal_mode_permanent = false
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1508466680]
+centered = false
+
+[node name="RevealMask" type="Sprite2D" parent="." unique_id=1517927515]
