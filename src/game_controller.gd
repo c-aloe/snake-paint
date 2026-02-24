@@ -51,6 +51,8 @@ const paint_scene = preload("res://scenes/paint_area.tscn")
 var paint_area = null
 @onready var progress_bar = %FillProgress
 
+@export var target_percent: float = 100.0
+
 #endregion
 
 func _ready() -> void:
@@ -86,7 +88,6 @@ func _enter_state(state: GameState):
 			level_manager.show_pause(true)
 		
 		GameState.LEVEL_COMPLETE:
-			paint_area.show_full_image()
 			var msg = "Finished in %s" % update_ui()
 			level_manager.show_level_complete("Completed", msg)
 
@@ -137,7 +138,8 @@ func update_ui() -> String:
 	var time_string := "%02d:%02d:%03d" % [minutes, seconds, milliseconds]
 
 	%TimeLabel.text = time_string
-	progress_bar.value = (100 - paint_area.target_percent) + paint_area.percent_revealed()
+	#var area_inside = paint_area.snake_area_inside($Snake.body, $Snake.snake_width)
+	progress_bar.value = paint_area.percent_filled()
 
 	return time_string
 	
@@ -175,47 +177,125 @@ func _prepare_level():
 		paint_area.free()
 		
 	# Put food down
-	$Food.new_food(paint_area)
+	$Food.new_food()
 
 	
 func _set_paint_area() -> void:		
 	paint_area = paint_scene.instantiate()
-	paint_area.setup(level_data.paint_area_width, level_data.paint_area_height, $Snake.snake_width / 2)
+	paint_area.setup(level_data.paint_area_width, level_data.paint_area_height)
 	paint_area.position = Vector2(
 		random.randi_range(0, window_size.x - paint_area.width),
 		random.randi_range(45, window_size.y - paint_area.height)	# 45 allows for UI at top
 	)
-	paint_area.target_percent = level_data.required_completion_percentage
+	target_percent = level_data.required_completion_percentage
 	add_child(paint_area)
-	
-	# # Move to the end of the scene tree so it's visible on top 
-	# #(I opted for transparent snake instead - see _ready())
-	#move_child(paint_area, get_child_count() - 1)
-	#paint_area.z_index = 30
-	#body.z_index = 0
-	#head.z_index = 0
 
 ## Signal callable from LevelManager LevelStartTimer
 func _on_countdown_finished() -> void:
 	set_state(GameState.PLAYING)
-	
-func _physics_process(delta) -> void:
-	if game_state == GameState.PLAYING:
-		# Snake
-		$Snake.move(delta)
-		# TODO: Make this event driven? snake's move signal
-		_check_snake_collisions()
-		
-		# Paint (if snake inside)
-		paint_area.paint($Snake)
-		
-		if paint_area.is_filled():
-			set_state(GameState.LEVEL_COMPLETE)
 
-func _check_snake_collisions() -> void:
+func get_snake_length() -> float:
+	var body = $Snake.body
+	var total := 0.0
+	for i in range(body.get_point_count() - 1):
+		total += body.get_point_position(i).distance_to(
+			body.get_point_position(i + 1)
+		)
+	return total
+
+func _physics_process(delta) -> void:
+	if game_state != GameState.PLAYING:
+		return
+		
+	# Snake
+	$Snake.move(delta)
+	# TODO: Make this event driven? snake's move signal
+	_food_snake_collisions()
+	
+	update_snake_mask($Snake.body)
+	
+	if paint_area.percent_filled() >= target_percent:
+		set_state(GameState.LEVEL_COMPLETE)
+	
+		
+'''		var body = $Snake.body
+		var point_count = body.get_point_count()
+
+		if point_count == 0:
+			return
+
+		var head_point = body.get_point_position(point_count - 1)
+		var current_tail = body.get_point_position(0)
+		
+		# If tail moved, erase the previous one
+		if previous_tail_point != Vector2.ZERO and current_tail != previous_tail_point:
+			paint_area.erase_segment(previous_tail_point, current_tail, $Snake.snake_width)
+		
+		paint_area.paint_head(head_point, $Snake.snake_width)
+
+		previous_tail_point = current_tail
+		
+		
+		
+		
+		
+		## Paint (if snake inside)
+		## Only use the head to draw (not all the body segments)
+		#paint_area.paint($Snake.body.points[-1], $Snake.snake_width)
+		##if _tail_in_paint_area():
+			##paint_area.paint($Snake.body.points[0], $Snake.snake_width)
+		###paint_area.paint($Snake)'''
+			
+			
+func _update_shader_snake():
+	var body = $Snake.body
+	var count = body.get_point_count()
+	const MAX_SHADER_POINTS := 128
+
+	if count < 2:
+		return
+
+	var mat := paint_area.mat as ShaderMaterial
+	
+	var start_index = max(0, count - MAX_SHADER_POINTS)
+
+	var points := []
+	for i in range(start_index, count):
+		var local = paint_area.to_local(body.get_point_position(i))
+		points.append(local)
+		
+	var actual_count = points.size()
+
+	mat.set_shader_parameter("snake_points", points)
+	mat.set_shader_parameter("snake_point_count", actual_count)
+	mat.set_shader_parameter("snake_radius", $Snake.snake_width * 0.5)
+
+# Call this whenever the snake moves
+func update_snake_mask(body: Line2D):
+	var mask_line = paint_area.get_node("MaskViewport/SnakeMaskLine")
+	var local_points = []
+	for p in $Snake.body.points:
+		local_points.append(paint_area.to_local(p))
+	mask_line.points = PackedVector2Array(local_points)
+	mask_line.width = body.width
+	
+			
+func _tail_in_paint_area() -> bool:
+	var tail_end = $Snake.body.points[0]
+	var x_start: int = paint_area.position.x - $Snake.snake_width / 2
+	var x_end: int = paint_area.position.x + paint_area.width + $Snake.snake_width / 2
+	var y_start = paint_area.position.y - $Snake.snake_width / 2
+	var y_end = paint_area.position.y + paint_area.height + $Snake.snake_width / 2
+	if tail_end.x > x_start and tail_end.x < x_end:
+		if tail_end.y > y_start and tail_end.y < y_end:
+			return true
+	return false
+	
+
+func _food_snake_collisions() -> void:
 	if $Food.check_collision($Snake):
 		$Snake.grow()
-		$Food.new_food(paint_area)
+		$Food.new_food()
 
 func _process(delta):
 	if game_state == GameState.PLAYING:

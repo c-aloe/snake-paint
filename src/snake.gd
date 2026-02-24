@@ -17,7 +17,7 @@ var random = RandomNumberGenerator.new()
 
 @onready var head = %SnakeHead
 var head_img = Image
-@onready var body = %Line2D
+@onready var body = %Body
 
 var snake_speed: float
 

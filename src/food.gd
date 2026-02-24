@@ -19,7 +19,14 @@ func check_collision(snake: Snake) -> bool:
 # -------------------------------------------------
 #  Spawn Logic
 # -------------------------------------------------
-func new_food(paint_area: SnakePaintArea) -> void:
+
+func new_food() -> void:
+	var x = random.randf_range(0, window_size.x)
+	var y = random.randf_range(0, window_size.y)
+	food = Vector2(x,y)
+	queue_redraw()
+
+func new_food_avoiding_paint_area(paint_area: SnakePaintArea) -> void:
 	var attempts := 0
 	var max_attempts := 1000
 	

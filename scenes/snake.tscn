@@ -8,7 +8,7 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.cte
 [node name="Snake" type="Node2D" unique_id=117699337]
 script = ExtResource("2_yc36x")
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1776024663]
+[node name="Body" type="Line2D" parent="." unique_id=1776024663]
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(6.1035156e-05, 3.0517578e-05)
