@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ImageLibrary" format=3 uid="uid://dfj714q7qnm5d"]
+
+[ext_resource type="Texture2D" uid="uid://yxqrkhw5ifl0" path="res://assets/level_images/natures_best.jpg" id="1_ejkl8"]
+[ext_resource type="Script" uid="uid://dq3bfcm7iwlx" path="res://src/image_library.gd" id="1_m1b6s"]
+[ext_resource type="Texture2D" uid="uid://dilgkymtegyd5" path="res://assets/level_images/andrey-k-IFJMJsP4rNs-unsplash.jpg" id="2_djcmx"]
+[ext_resource type="Texture2D" uid="uid://7voolh1k7073" path="res://assets/level_images/andrey-k-IHeOFRnemOk-unsplash.jpg" id="3_ielxq"]
+[ext_resource type="Texture2D" uid="uid://xwqi33sjdi5m" path="res://assets/level_images/brooke-balentine-tLQIm1NTTss-unsplash.jpg" id="4_a140m"]
+
+[resource]
+script = ExtResource("1_m1b6s")
+theme_name = "Nature"
+images = Array[Texture2D]([ExtResource("1_ejkl8"), ExtResource("2_djcmx"), ExtResource("3_ielxq"), ExtResource("4_a140m")])
+metadata/_custom_type_script = "uid://dq3bfcm7iwlx"

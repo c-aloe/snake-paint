@@ -6,6 +6,7 @@
 script = ExtResource("1_38ehr")
 paint_area_width = 140
 paint_area_height = 140
+required_completion_percentage = 90.0
 snake_speed = 160
 snake_width = 20.0
 challenge = "No growth. Plan carefully."

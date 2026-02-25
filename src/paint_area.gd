@@ -3,7 +3,7 @@ class_name SnakePaintArea
 
 '''
 Ideas:
-	Add a function to highlight (strobe) any unmarked cells
+	Add a way to highlight (strobe) any unmarked cells
 '''
 
 # -------------------------------------------------
@@ -17,9 +17,10 @@ Ideas:
 
 @export_category("Reveal Settings")
 # Note that some of these may be overridden by level settings
-@export var permanent_reveal_mode: bool = false
 @export var color_reveal_mode: bool = false
 @export var background_color: Color = Color(randf(), randf(), randf())
+
+@onready var reveal_mask = %RevealMask
 
 # -------------------------------------------------
 #  Properties
@@ -34,8 +35,8 @@ var mat: ShaderMaterial
 # -------------------------------------------------
 
 func _ready() -> void:
-	mat = $SubViewportContainer/SubViewport/RevealMask.material
-	mat.set_shader_parameter("level_texture", $SubViewportContainer/SubViewport/RevealMask.texture)
+	mat = reveal_mask.material
+	mat.set_shader_parameter("level_texture", reveal_mask.texture)
 	mat.set_shader_parameter("color_mode", color_reveal_mode)
 	mat.set_shader_parameter("solid_color", background_color)
 
@@ -45,47 +46,38 @@ func _ready() -> void:
 	
 func setup(w, h) -> void:
 	# Assign mat immediately so it's not null for the following lines
-	mat = $SubViewportContainer/SubViewport/RevealMask.material
+	mat = reveal_mask.material
 
 	width = w
 	height = h
 	$MaskViewport.size = Vector2i(width, height)
 	$SubViewportContainer/SubViewport.size = Vector2i(width, height)
 
-	# Re-Link the Mask Viewport's texture to the shader
-	var mask_tex = $MaskViewport.get_texture()
-	mat.set_shader_parameter("mask_texture", mask_tex)
-	
-	load_level_image("res://assets/level_images/natures_best.jpg")
-	
 	paint_area_rect = Rect2(Vector2.ZERO, Vector2(width, height))
+
+func animate() -> void:
+	# Needs to load the original image (have saved and just swap it out)
 	
-	# Create mask
-	$SubViewportContainer/SubViewport/RevealMask.texture = ImageTexture.create_from_image(level_image)
+	remove_mask()
+	# Favorites: Bubble ascend, stretch, pulsate
+	TweenFX.pulsate(self, 1.0, 1.5)
 
-func load_level_image(path: String) -> bool:
-	level_image = Image.new()
-
-	var err = level_image.load(path)
-	if err != OK:
-		push_error("Failed to load image: %s" % path)
-		return false
-
-	level_image.resize(width, height, Image.INTERPOLATE_NEAREST)
-	level_image.convert(Image.FORMAT_RGBA8) # Fix for blit_rect error
-	return true
+func set_level_texture(texture: Texture2D) -> void:	
+	reveal_mask.texture = texture
+	reveal_mask.scale = Vector2(
+		float(width) / texture.get_width(),
+		float(height) / texture.get_height()
+	)
+	mat.set_shader_parameter("level_texture", texture)
 
 func _draw() -> void:
 	draw_rect(paint_area_rect, border_color, false, border_width)
 	
 func percent_filled() -> float:
-	# 1. Get the texture from your Viewport
 	var texture = $SubViewportContainer/SubViewport.get_texture()
 	
-	# 2. Convert to Image data (this moves data from GPU to CPU)
 	var img = texture.get_image()
 	
-	# 3. Use the helper to count
 	var painted_pixels = _count_colored_pixels(img)
 	var total_pixels = img.get_width() * img.get_height()
 	
@@ -103,3 +95,6 @@ func _count_colored_pixels(img: Image) -> int:
 				count += 1
 				
 	return count
+
+func remove_mask() -> void:
+	reveal_mask.material = null

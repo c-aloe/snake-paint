@@ -17,12 +17,17 @@ var countdown: int = 3
 @onready var level_text_main: Label = %LevelTextMain
 @onready var level_text_sub: Label = %LevelTextSub
 
-@onready var pause_label: Label = %PauseLabel
+@onready var pause_label: Label = %UI/PauseLabel
 
 func load_level(level: int) -> LevelData:
 	var level_file_path = "res://levels/level_%d.tres" % level
 	var level_info = load(level_file_path)
 	return level_info
+	
+func prepare_level(current_level: int, level_data: LevelData) -> void:
+	start_countdown()
+	show_level_intro("Level %d" % current_level, level_data.challenge)
+	visible = true
 
 func start_countdown() -> void:
 	timer.start()
@@ -32,11 +37,13 @@ func start_countdown() -> void:
 	
 func _on_level_start_timer_timeout() -> void:
 	if countdown > 1:
+		#TweenFX.fade_in($LevelDisplay, 0.1)
 		countdown -= 1
 		countdown_label.text = str(countdown)
 	else:
 		timer.stop()
 		countdown = 3
+		#TweenFX.fade_out($LevelDisplay, 0.1)
 		$LevelDisplay.visible = false
 		countdown_finished.emit()
 	

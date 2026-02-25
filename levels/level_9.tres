@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://khg3uylyfs4b"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_rgxam"]
+
+[resource]
+script = ExtResource("1_rgxam")
+paint_area_width = 250
+paint_area_height = 200
+required_completion_percentage = 80.0
+snake_speed = 180
+snake_width = 6.0
+snake_width_growth_speed = 2.0
+time_limit = 75.0
+challenge = "Precision under pressure."
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

@@ -1,28 +1,19 @@
 Snake todo
 
 Bugs/Issues:
-	Resuming from pause adds a new paint area (no!)
-	Level 7 is too hard
+	Texture not resizing in paint area (layout issue)
 	
 Features:
+	Add sound effects
+	Better/more images
+	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
 	More levels
 	Menu where users can
 		- Set input controller
 		- Choose theme
-	Level completed animation - revealed image scales and centers - or allow users to interact by moving scene around, zooming in, etc.
-	Better/more images
-	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
-
+	On level completion, reload the larger version image into the paint area
+	
 Code Improvements:
-	Make UI its own scene
 	Make LevelManager its own scene
-	Introduce LevelSession Node (see ChatGPT)
-	Pass image in to paint area from controller
-	Emit "loaded" from paint area
-	Update paint area so that the head paints and tail removes
-		(would need an extra case for when the snake grows while its body is on the paint area)
-	Decouple paint area from snake terminology (call it circle or something instead)
-
 
 Ideas to implement:
-	Multiple paint areas

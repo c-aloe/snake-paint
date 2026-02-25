@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ImageLibrary" format=3 uid="uid://giqv73w24wp5"]
+
+[ext_resource type="Texture2D" uid="uid://caf8iq0scb8cp" path="res://assets/level_images/Untitled.png" id="1_hobhj"]
+[ext_resource type="Script" uid="uid://dq3bfcm7iwlx" path="res://src/image_library.gd" id="5_xf28n"]
+
+[resource]
+script = ExtResource("5_xf28n")
+theme_name = "Testing"
+images = Array[Texture2D]([ExtResource("1_hobhj")])
+metadata/_custom_type_script = "uid://dq3bfcm7iwlx"

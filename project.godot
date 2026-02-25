@@ -14,10 +14,18 @@ config/name="Snake"
 run/main_scene="uid://c20kw0w7gfgid"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+TweenFX="*uid://d2n10rw2dnx8o"
+
 [display]
 
 window/size/viewport_width=1000
 window/size/viewport_height=600
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/TweenFX/plugin.cfg")
 
 [physics]
 

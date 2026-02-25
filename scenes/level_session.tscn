@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://5pcrjr6ic5cb"]
+
+[ext_resource type="Script" uid="uid://cobxpnj5xapbb" path="res://src/level_session.gd" id="1_03hae"]
+[ext_resource type="Resource" uid="uid://giqv73w24wp5" path="res://resources/image_libraries/test.tres" id="2_468kd"]
+
+[node name="LevelSession" type="Node2D" unique_id=402415766]
+script = ExtResource("1_03hae")
+image_library = ExtResource("2_468kd")

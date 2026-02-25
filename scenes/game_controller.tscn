@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b8bk4d34f7pwc" path="res://src/level_manager.gd" id="3_h843c"]
 [ext_resource type="PackedScene" uid="uid://cj4iw3w8uxlio" path="res://scenes/snake.tscn" id="3_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://scenes/food.tscn" id="4_h843c"]
+[ext_resource type="PackedScene" uid="uid://c7c20680kuff4" path="res://scenes/ui.tscn" id="6_burlk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auphx"]
 bg_color = Color(0.38431373, 0.38431373, 0.38431373, 0.23529412)
@@ -22,7 +23,7 @@ script = ExtResource("1_ts4rt")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1898965690]
 z_index = -10
-position = Vector2(376, 184)
+position = Vector2(570, 319)
 texture = ExtResource("2_rc0pn")
 
 [node name="PaintArea" parent="." unique_id=1043497585 instance=ExtResource("3_e85df")]
@@ -34,76 +35,8 @@ visible = false
 [node name="Food" parent="." unique_id=299069466 instance=ExtResource("4_h843c")]
 visible = false
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=29719742]
+[node name="UI" parent="." unique_id=316483432 instance=ExtResource("6_burlk")]
 unique_name_in_owner = true
-
-[node name="PauseLabel" type="Label" parent="UI" unique_id=434404607]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -24.5
-offset_right = 67.5
-offset_bottom = 24.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 35
-text = "PAUSED"
-
-[node name="GameMenu" type="VBoxContainer" parent="UI" unique_id=1264868743]
-visible = false
-offset_left = 10.0
-offset_top = 227.0
-offset_right = 990.0
-offset_bottom = 372.0
-size_flags_vertical = 4
-
-[node name="IntroText" type="Label" parent="UI/GameMenu" unique_id=1431011534]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Paint with the snake.
-Use your mouse to move the snake throug the shapes, filling them in.
-Beat the challenges, beat your own best time.
-How well can you do it?"
-horizontal_alignment = 1
-
-[node name="PlayButton" type="Button" parent="UI/GameMenu" unique_id=209262172]
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "Click to play
-or hit SPACE"
-theme_override_font_sizes/font_size = 23
-text = "Start Painting"
-
-[node name="HUD" type="HBoxContainer" parent="UI" unique_id=522959037]
-unique_name_in_owner = true
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 990.0
-offset_bottom = 52.0
-size_flags_vertical = 0
-
-[node name="TitleLabel" type="Label" parent="UI/HUD" unique_id=595528398]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Snake Paint"
-
-[node name="FillProgress" type="ProgressBar" parent="UI/HUD" unique_id=1304449905]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-
-[node name="TimeLabel" type="Label" parent="UI/HUD" unique_id=1053364457]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "00:00:00"
-horizontal_alignment = 2
 
 [node name="LevelManager" type="CanvasLayer" parent="." unique_id=166887724]
 unique_name_in_owner = true
@@ -169,6 +102,5 @@ text = "Next Level"
 [node name="LevelStartTimer" type="Timer" parent="LevelManager" unique_id=1992688134]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="UI/GameMenu/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="LevelManager/LevelDisplay/VBoxContainer2/MarginContainer/NextLevelButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="LevelManager/LevelStartTimer" to="LevelManager" method="_on_level_start_timer_timeout"]

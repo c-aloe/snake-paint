@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c7c20680kuff4"]
+
+[node name="UI" type="CanvasLayer" unique_id=316483432]
+
+[node name="PauseLabel" type="Label" parent="." unique_id=687570646]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -24.5
+offset_right = 67.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 35
+text = "PAUSED"
+
+[node name="GameMenu" type="VBoxContainer" parent="." unique_id=1641679082]
+visible = false
+offset_left = 10.0
+offset_top = 227.0
+offset_right = 990.0
+offset_bottom = 372.0
+size_flags_vertical = 4
+
+[node name="IntroText" type="Label" parent="GameMenu" unique_id=1571339789]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Paint with the snake.
+Move the snake through the shapes, filling them in.
+Beat the challenges, beat your own best time.
+How well can you do it?
+"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="GameMenu" unique_id=413794338]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Click to play
+or hit SPACE"
+theme_override_font_sizes/font_size = 23
+text = "Start Painting"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="GameMenu" unique_id=1448594632]
+layout_mode = 2
+size_flags_horizontal = 0
+folded = true
+title = "Controls"
+
+[node name="MenuBar" type="ItemList" parent="GameMenu/FoldableContainer" unique_id=446312190]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+auto_width = true
+auto_height = true
+item_count = 2
+item_0/text = "Mouse"
+item_1/text = "Keyboard"
+
+[node name="HUD" type="HBoxContainer" parent="." unique_id=822095444]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 990.0
+offset_bottom = 52.0
+size_flags_vertical = 0
+
+[node name="TitleLabel" type="Label" parent="HUD" unique_id=1142971900]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Snake Paint"
+
+[node name="FillProgress" type="ProgressBar" parent="HUD" unique_id=899158242]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD" unique_id=1887770724]
+layout_mode = 2
+text = "/"
+
+[node name="TargetLabel" type="Label" parent="HUD" unique_id=1253359120]
+layout_mode = 2
+text = "100"
+
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=1533886909]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00:00"
+horizontal_alignment = 2
+
+[node name="PauseButton" type="Button" parent="HUD" unique_id=3230144]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = " || "

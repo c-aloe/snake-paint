@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://c7eadxysfaub7"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_hdnq1"]
+
+[resource]
+script = ExtResource("1_hdnq1")
+paint_area_width = 220
+paint_area_height = 150
+required_completion_percentage = 90.0
+snake_speed = 170
+snake_width = 10.0
+snake_width_growth_speed = 6.0
+challenge = "Rapid expansion."
+time_limit = 60.0
+reveal_multiplier = 1.2
+metadata/_custom_type_script = "uid://dabl2n7348vfn"
