@@ -7,27 +7,6 @@ Set a box in the middle of the screen that has to be filled by the
 snake's color. Box changes shape, increases in size, etc. as levels
 progress. Snake reveals an image in the paint area.
 Snake gets longer and wider each time it eats food (grows)
-	
-Issues:
-	If food is in the paint area, the grid filling stops
-		- Either don't place food in paint area, or rethink why it does this
-Features:
-	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
-	More levels
-	Menu where users can
-		- Set input controller
-		- Choose theme
-	Level completed animation - revealed image scales and centers - or allow users to interact by moving scene around, zooming in, etc.
-Code Improvements:
-	Switch to randf()
-	Make UI its own scene
-	Make LevelManager its own scene
-	Introduce LevelSession Node (see ChatGPT)
-	Pass image in to paint area from controller
-	Emit "loaded" from paint area
-	Update paint area so that the head paints and tail removes
-		(would need an extra case for when the snake grows while its body is on the paint area)
-	Decouple paint area from snake terminology (call it circle or something instead)
 '''
 enum GameState {
 	PRE_LEVEL,
@@ -88,6 +67,7 @@ func _enter_state(state: GameState):
 			level_manager.show_pause(true)
 		
 		GameState.LEVEL_COMPLETE:
+			$Food.visible = false
 			var msg = "Finished in %s" % update_ui()
 			level_manager.show_level_complete("Completed", msg)
 

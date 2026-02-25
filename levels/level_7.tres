@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://rfs5gr4fllll"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_38ehr"]
+
+[resource]
+script = ExtResource("1_38ehr")
+paint_area_width = 140
+paint_area_height = 140
+snake_speed = 160
+snake_width = 20.0
+challenge = "No growth. Plan carefully."
+growth_enabled = false
+metadata/_custom_type_script = "uid://dabl2n7348vfn"
