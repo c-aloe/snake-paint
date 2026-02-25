@@ -1,10 +1,8 @@
 Snake todo
 
 Bugs/Issues:
-	Texture not resizing in paint area (layout issue)
 	
 Features:
-	Add sound effects
 	Better/more images
 	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
 	More levels
@@ -12,6 +10,8 @@ Features:
 		- Set input controller
 		- Choose theme
 	On level completion, reload the larger version image into the paint area
+	I need a new head
+	Add sound effects
 	
 Code Improvements:
 	Make LevelManager its own scene

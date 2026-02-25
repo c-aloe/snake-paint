@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://c20kw0w7gfgid"]
 
 [ext_resource type="Script" uid="uid://c713ppqu088xc" path="res://src/game_controller.gd" id="1_ts4rt"]
-[ext_resource type="Texture2D" uid="uid://bk0rlar8rnfv3" path="res://assets/background2.png" id="2_rc0pn"]
+[ext_resource type="Texture2D" uid="uid://bk0rlar8rnfv3" path="res://assets/backgrounds/background2.png" id="2_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://da7er3koffqf7" path="res://scenes/paint_area.tscn" id="3_e85df"]
 [ext_resource type="Script" uid="uid://b8bk4d34f7pwc" path="res://src/level_manager.gd" id="3_h843c"]
 [ext_resource type="PackedScene" uid="uid://cj4iw3w8uxlio" path="res://scenes/snake.tscn" id="3_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://scenes/food.tscn" id="4_h843c"]
 [ext_resource type="PackedScene" uid="uid://c7c20680kuff4" path="res://scenes/ui.tscn" id="6_burlk"]
+[ext_resource type="AudioStream" uid="uid://c0avj6y1cdrb8" path="res://assets/sounds/september-219737.mp3" id="8_h0hye"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auphx"]
 bg_color = Color(0.38431373, 0.38431373, 0.38431373, 0.23529412)
@@ -101,6 +102,10 @@ text = "Next Level"
 
 [node name="LevelStartTimer" type="Timer" parent="LevelManager" unique_id=1992688134]
 unique_name_in_owner = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1493767829]
+stream = ExtResource("8_h0hye")
+autoplay = true
 
 [connection signal="pressed" from="LevelManager/LevelDisplay/VBoxContainer2/MarginContainer/NextLevelButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="LevelManager/LevelStartTimer" to="LevelManager" method="_on_level_start_timer_timeout"]
