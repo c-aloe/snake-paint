@@ -10,5 +10,4 @@ required_completion_percentage = 90.0
 snake_speed = 160
 snake_width = 20.0
 challenge = "No growth. Plan carefully."
-growth_enabled = false
 metadata/_custom_type_script = "uid://dabl2n7348vfn"

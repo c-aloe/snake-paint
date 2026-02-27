@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://ch7slpdrvumdx"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_y2tey"]
+
+[resource]
+script = ExtResource("1_y2tey")
+paint_area_width = 100
+paint_area_height = 100
+required_completion_percentage = 98.0
+snake_speed = 130
+snake_width = 3.0
+snake_width_growth_speed = 1.0
+challenge = "Precision Calm"
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

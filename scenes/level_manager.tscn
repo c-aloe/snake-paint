@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://d256ah3mrxrrf"]
+
+[ext_resource type="Script" uid="uid://b8bk4d34f7pwc" path="res://src/level_manager.gd" id="1_06fa7"]
+[ext_resource type="FontFile" uid="uid://cjlt5h5h621ss" path="res://assets/fonts/Fredoka_SemiCondensed-Bold.ttf" id="2_5eglo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auphx"]
+bg_color = Color(0.38431373, 0.38431373, 0.38431373, 0.23529412)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.2627451)
+shadow_size = 10
+shadow_offset = Vector2(3, 3)
+
+[node name="LevelManager" type="CanvasLayer" unique_id=2007956018]
+script = ExtResource("1_06fa7")
+
+[node name="LevelDisplay" type="CenterContainer" parent="." unique_id=703112286]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LevelDisplay" unique_id=123805274]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="LevelDisplay/VBoxContainer2" unique_id=1006692698]
+layout_mode = 2
+
+[node name="CenterPanel" type="Panel" parent="LevelDisplay/VBoxContainer2/CenterContainer" unique_id=873354339]
+custom_minimum_size = Vector2(800, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_auphx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelDisplay/VBoxContainer2/CenterContainer" unique_id=499386649]
+layout_mode = 2
+
+[node name="LevelTextMain" type="Label" parent="LevelDisplay/VBoxContainer2/CenterContainer/VBoxContainer" unique_id=879966553]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5eglo")
+theme_override_font_sizes/font_size = 30
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="LevelTextSub" type="Label" parent="LevelDisplay/VBoxContainer2/CenterContainer/VBoxContainer" unique_id=557624840]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5eglo")
+text = "This is the challenge  for this level"
+horizontal_alignment = 1
+
+[node name="CountdownLabel" type="Label" parent="LevelDisplay/VBoxContainer2" unique_id=892532576]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5eglo")
+theme_override_font_sizes/font_size = 36
+text = "3"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelDisplay/VBoxContainer2" unique_id=1624096589]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="NextLevelButton" type="Button" parent="LevelDisplay/VBoxContainer2/MarginContainer" unique_id=1760847430]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Click to play
+or hit SPACE"
+theme_override_fonts/font = ExtResource("2_5eglo")
+theme_override_font_sizes/font_size = 23
+text = "Next Level"
+
+[node name="LevelStartTimer" type="Timer" parent="." unique_id=1465935683]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="LevelDisplay/VBoxContainer2/MarginContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="timeout" from="LevelStartTimer" to="." method="_on_level_start_timer_timeout"]

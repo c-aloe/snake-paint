@@ -1,19 +1,60 @@
 Snake todo
 
 Bugs/Issues:
+	In color mode, the image still shows at level end
+	Make a random mode when the levels end
 	
 Features:
-	Better/more images
-	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
+	New level concepts:
+		Implement reveal multiplier
+		Implement obstacles
+		Implement multiple paint areas
+		Implement different shaped paint areas (circle, polygon, shapes)
 	More levels
 	Menu where users can
-		- Set input controller
+		- Set input controller (IP)
 		- Choose theme
-	On level completion, reload the larger version image into the paint area
-	I need a new head
+	Replay level option (choose level screen?)
+	Persistent Stats
+		- Fastest time, Best completion %, Longest snake,
+		  Total area painted lifetime
+	Explosive paint animation
+	Adjust to a system where
+		- Always play the level to 100% fill
+		- Only "pass" if percent reached, replay if not
+		- Beating the time = bonus (see below)
+	On level completion reload the larger version to fix the ugly scale
 	Add sound effects
+		Level end
+		Painting (pitch rises with percent)
+	Explore better background music
+	Mute sound effects option
+	Better/more images
+	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
 	
 Code Improvements:
-	Make LevelManager its own scene
+	Spawn a new paintarea node for animation at level end
 
-Ideas to implement:
+Maybe Someday:
+	Should beating time challenge increase reveal multiplier
+	   globally for more visual satisfaction?
+	Beating challenges could:
+		Star ratings
+			- i.e. 1 star = complete, 2 stars = under time,
+				   3 stars = under faster time
+		Unlock themes
+		Rare images
+		Special color palettes
+		Get new snake skins
+			- color, glow effect, trail gradient
+	Challenge mode:
+		Beating all levels unlocks
+			endless mode
+			random map mode
+			150% speed mode
+	"Paint Tokens" - currency for buying snake skins, trail effects,
+			  or unlocking experimental levels
+	In-level changes:
+		Gradual snake speedup (in level)
+		% Requirement goes up
+		

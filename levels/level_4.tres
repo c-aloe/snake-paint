@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_0djwf")
-paint_area_width = 120
-paint_area_height = 120
+paint_area_width = 110
+paint_area_height = 110
 snake_speed = 130
 snake_width = 12.0
 snake_width_growth_speed = 5.0

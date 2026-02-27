@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://5o876lkjlpyl"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_rogwt"]
+
+[resource]
+script = ExtResource("1_rogwt")
+paint_area_width = 150
+paint_area_height = 150
+required_completion_percentage = 80.0
+snake_speed = 210
+snake_width = 5.0
+snake_width_growth_speed = 6.0
+time_limit = 35.0
+challenge = "The Sprint"
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

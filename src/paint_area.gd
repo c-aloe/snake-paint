@@ -20,6 +20,7 @@ Ideas:
 @export var color_reveal_mode: bool = false
 @export var background_color: Color = Color(randf(), randf(), randf())
 
+@onready var sub_viewport = %SubViewport
 @onready var reveal_mask = %RevealMask
 
 # -------------------------------------------------
@@ -44,23 +45,35 @@ func _ready() -> void:
 	var mask_tex = $MaskViewport.get_texture()
 	mat.set_shader_parameter("mask_texture", mask_tex)
 	
-func setup(w, h) -> void:
+func setup(paint_area_width: int, paint_area_height: int) -> void:
 	# Assign mat immediately so it's not null for the following lines
 	mat = reveal_mask.material
 
-	width = w
-	height = h
+	width = paint_area_width
+	height = paint_area_height
 	$MaskViewport.size = Vector2i(width, height)
-	$SubViewportContainer/SubViewport.size = Vector2i(width, height)
+	sub_viewport.size = Vector2i(width, height)
 
 	paint_area_rect = Rect2(Vector2.ZERO, Vector2(width, height))
 
-func animate() -> void:
+	TweenFX.glow_pulse(self, 1.0, 0.02)
+
+func animate(window_size: Vector2) -> void:
 	# Needs to load the original image (have saved and just swap it out)
-	
 	remove_mask()
-	# Favorites: Bubble ascend, stretch, pulsate
-	TweenFX.pulsate(self, 1.0, 1.5)
+	
+	TweenFX.stop(self, TweenFX.Animations.GLOW_PULSE)
+	
+	## This tween scales the image to almost full screen and centers it, but it looks terrible atm
+	#var tween = get_tree().create_tween()
+	#var scale_factor = (window_size.y - 120) / height
+	#var paint_area_to = Vector2(
+		#(window_size.x / 2.0) - (width * scale_factor) / 2.0, 
+		#(window_size.y / 2.0) - (height * scale_factor) / 2.0
+	#)
+	#tween.tween_property(self, "scale", Vector2(scale_factor, scale_factor), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	#tween.parallel().tween_property(self, "position", paint_area_to, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	
 
 func set_level_texture(texture: Texture2D) -> void:	
 	reveal_mask.texture = texture
@@ -71,10 +84,10 @@ func set_level_texture(texture: Texture2D) -> void:
 	mat.set_shader_parameter("level_texture", texture)
 
 func _draw() -> void:
-	draw_rect(paint_area_rect, border_color, false, border_width)
+	draw_rect(paint_area_rect, border_color, false, -border_width)
 	
 func percent_filled() -> float:
-	var texture = $SubViewportContainer/SubViewport.get_texture()
+	var texture = sub_viewport.get_texture()
 	
 	var img = texture.get_image()
 	

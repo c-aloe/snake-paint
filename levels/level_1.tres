@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_8g6tw")
-paint_area_width = 50
-paint_area_height = 50
+paint_area_width = 60
+paint_area_height = 60
 snake_speed = 100
-snake_width = 15.0
+snake_width = 14.0
 snake_width_growth_speed = 4.0
 challenge = "Paint the Box!"
 metadata/_custom_type_script = "uid://dabl2n7348vfn"

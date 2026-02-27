@@ -6,7 +6,7 @@
 script = ExtResource("1_dld0a")
 paint_area_width = 300
 paint_area_height = 250
-required_completion_percentage = 95.0
+required_completion_percentage = 85.0
 snake_speed = 190
 snake_width = 8.0
 snake_width_growth_speed = 4.0

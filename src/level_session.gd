@@ -50,6 +50,7 @@ func _create_components() -> void:
 
 func _configure_from_level_data() -> void:
 	# Setup paint area
+	paint_area.color_reveal_mode = level_data.reveal_mode == LevelData.RevealMode.COLOR
 	paint_area.setup(
 		level_data.paint_area_width,
 		level_data.paint_area_height
@@ -89,6 +90,8 @@ func _physics_process(delta):
 
 		if current_percent >= target_percent:
 			is_active = false
+			snake.visible = false
+			food.visible = false
 			emit_signal("level_completed", time)
 
 # Call this whenever the snake moves
@@ -104,3 +107,7 @@ func _handle_food_collision():
 	if food.check_collision(snake):
 		snake.grow()
 		food.new_food()
+		
+		# Effects
+		TweenFX.shake(get_parent(), 0.2, 5.0)
+		$SnakeEat.play()

@@ -7,6 +7,7 @@ func show_level_intro(main_text: String, subtext: String) -> void:
 	$LevelDisplay.visible = true
 		
 signal countdown_finished()
+signal go_to_next_level()
 
 @onready var timer: Timer = %LevelStartTimer
 @onready var countdown_label: Label = %CountdownLabel
@@ -60,3 +61,7 @@ func show_level_complete(main_text: String, subtext: String) -> void:
 	countdown_label.visible = false
 	$LevelDisplay.visible = true
 	next_level_button.visible = true
+	TweenFX.pop_in(next_level_button)
+
+func _on_next_level_button_pressed() -> void:
+	go_to_next_level.emit()

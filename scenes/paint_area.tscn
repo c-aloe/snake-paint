@@ -13,8 +13,9 @@ z_as_relative = false
 script = ExtResource("1_p1uqb")
 width = 0
 height = 0
-border_width = 3
+border_width = 4
 border_color = Color(0.261653, 0.30302396, 0.59735775, 1)
+color_reveal_mode = true
 
 [node name="MaskViewport" type="SubViewport" parent="." unique_id=2049362245]
 transparent_bg = true
@@ -27,24 +28,23 @@ end_cap_mode = 2
 centered = false
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=318861010]
-visible = false
 offset_right = 50.0
 offset_bottom = 50.0
 stretch_mode = 1
 alignment_horizontal = 0
 alignment_vertical = 0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=401568327]
-offset_right = 50.0
-offset_bottom = 50.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer" unique_id=401568327]
+layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1752739209]
+[node name="SubViewport" type="SubViewport" parent="AspectRatioContainer/SubViewportContainer" unique_id=1752739209]
+unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 4
 
-[node name="RevealMask" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=1517927515]
+[node name="RevealMask" type="Sprite2D" parent="AspectRatioContainer/SubViewportContainer/SubViewport" unique_id=1517927515]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_klhlt")
 centered = false

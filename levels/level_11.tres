@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://75q2k20udh8e"]
+
+[ext_resource type="Script" uid="uid://dabl2n7348vfn" path="res://src/level_data.gd" id="1_ft72y"]
+
+[resource]
+script = ExtResource("1_ft72y")
+paint_area_width = 350
+paint_area_height = 250
+required_completion_percentage = 85.0
+snake_speed = 160
+snake_width = 10.0
+snake_width_growth_speed = 3.0
+challenge = "The Marathon"
+metadata/_custom_type_script = "uid://dabl2n7348vfn"

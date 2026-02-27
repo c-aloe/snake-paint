@@ -11,7 +11,8 @@ func _ready() -> void:
 	random.randomize()
 
 func _draw() -> void:
-	draw_circle(food, food_radius, Color(1, 0, 0))
+	pass
+	#draw_circle(food, food_radius, Color(1, 0, 0))
 
 func check_collision(snake: Snake) -> bool:
 	return snake.head.position.distance_to(food) < snake.snake_width
@@ -24,8 +25,10 @@ func new_food() -> void:
 	var x = random.randf_range(0, window_size.x)
 	var y = random.randf_range(0, window_size.y)
 	food = Vector2(x,y)
-	TweenFX.fade_in(self)
 	queue_redraw()
+	$Sprite2D.position = food
+	await TweenFX.fade_in(self).finished
+	TweenFX.float_bob(self, 0.5, 1)
 
 '''
 func new_food_avoiding_paint_area(paint_area: SnakePaintArea) -> void:

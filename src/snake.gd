@@ -62,21 +62,27 @@ func _direction_input() -> int:
 	if Input.is_action_pressed("ui_right"):
 		direction = 1
 	return direction
-	
+
+
 func move(delta) -> void:
 	var direction: int = 0
+	
 	if input_controller == Controllers.KEYBOARD:
 		direction = _direction_input()
 		head.rotation += angular_speed * direction * delta
+		
 	elif input_controller == Controllers.MOUSE:
 		var mouse_pos = get_global_mouse_position()
 		var target_angle = (mouse_pos - head.global_position).angle()
-		# subtract PI/2 because sprite faces UP instead of RIGHT
-		head.rotation = lerp_angle(head.rotation, target_angle + PI/2, angular_speed * delta)
+		# Sprite faces DOWN
+		head.rotation = lerp_angle(
+			head.rotation,
+			target_angle - PI/2,
+			angular_speed * delta
+		)
 
-		
-	var velocity = Vector2.UP.rotated(head.rotation) * snake_speed
-	head.position += velocity * delta
+	var forward = Vector2.DOWN.rotated(head.rotation)
+	head.position += forward * snake_speed * delta
 	
 	body.add_point(head.position)
 	_trim_tail()

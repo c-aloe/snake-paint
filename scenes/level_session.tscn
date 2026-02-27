@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cobxpnj5xapbb" path="res://src/level_session.gd" id="1_03hae"]
 [ext_resource type="Resource" uid="uid://giqv73w24wp5" path="res://resources/image_libraries/test.tres" id="2_468kd"]
+[ext_resource type="AudioStream" uid="uid://c6n0nf3l46uhq" path="res://assets/sounds/delon_boomkin-notification-stereo-trill-447602.mp3" id="3_ykaok"]
 
 [node name="LevelSession" type="Node2D" unique_id=402415766]
 script = ExtResource("1_03hae")
 image_library = ExtResource("2_468kd")
+
+[node name="SnakeEat" type="AudioStreamPlayer2D" parent="." unique_id=334362377]
+stream = ExtResource("3_ykaok")
+
+[node name="SnakePaint" type="AudioStreamPlayer2D" parent="." unique_id=942436786]

@@ -13,6 +13,7 @@ config_version=5
 config/name="Snake"
 run/main_scene="uid://c20kw0w7gfgid"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/image="uid://dutxhmslovumi"
 
 [autoload]
 
@@ -20,8 +21,7 @@ TweenFX="*uid://d2n10rw2dnx8o"
 
 [display]
 
-window/size/viewport_width=1000
-window/size/viewport_height=600
+window/size/mode=2
 
 [editor_plugins]
 

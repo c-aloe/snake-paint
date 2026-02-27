@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://cj4iw3w8uxlio"]
 
+[ext_resource type="Texture2D" uid="uid://byyfdlinmetms" path="res://assets/images/snake2.png" id="2_auphx"]
 [ext_resource type="Script" uid="uid://dponib5j78vb6" path="res://src/snake.gd" id="2_yc36x"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yc36x"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [node name="Snake" type="Node2D" unique_id=117699337]
 script = ExtResource("2_yc36x")
@@ -15,12 +13,12 @@ position = Vector2(6.1035156e-05, 3.0517578e-05)
 scale = Vector2(0.99999994, 0.99999994)
 points = PackedVector2Array(565.99994, 337.99997)
 width = 30.0
-default_color = Color(0.21176471, 0.23921569, 0.32156864, 1)
+default_color = Color(0.21176471, 0.4392157, 0.32156864, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="SnakeHead" type="Sprite2D" parent="." unique_id=127028122]
 unique_name_in_owner = true
-position = Vector2(512, 146)
-texture = SubResource("CompressedTexture2D_yc36x")
+position = Vector2(500, 300)
+texture = ExtResource("2_auphx")

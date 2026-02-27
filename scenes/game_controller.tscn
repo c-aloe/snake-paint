@@ -3,21 +3,12 @@
 [ext_resource type="Script" uid="uid://c713ppqu088xc" path="res://src/game_controller.gd" id="1_ts4rt"]
 [ext_resource type="Texture2D" uid="uid://bk0rlar8rnfv3" path="res://assets/backgrounds/background2.png" id="2_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://da7er3koffqf7" path="res://scenes/paint_area.tscn" id="3_e85df"]
-[ext_resource type="Script" uid="uid://b8bk4d34f7pwc" path="res://src/level_manager.gd" id="3_h843c"]
 [ext_resource type="PackedScene" uid="uid://cj4iw3w8uxlio" path="res://scenes/snake.tscn" id="3_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://scenes/food.tscn" id="4_h843c"]
 [ext_resource type="PackedScene" uid="uid://c7c20680kuff4" path="res://scenes/ui.tscn" id="6_burlk"]
+[ext_resource type="PackedScene" uid="uid://d256ah3mrxrrf" path="res://scenes/level_manager.tscn" id="7_h0hye"]
 [ext_resource type="AudioStream" uid="uid://c0avj6y1cdrb8" path="res://assets/sounds/september-219737.mp3" id="8_h0hye"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auphx"]
-bg_color = Color(0.38431373, 0.38431373, 0.38431373, 0.23529412)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_color = Color(0, 0, 0, 0.2627451)
-shadow_size = 10
-shadow_offset = Vector2(3, 3)
+[ext_resource type="Texture2D" uid="uid://dutxhmslovumi" path="res://logo.png" id="9_d6ul8"]
 
 [node name="GameController" type="Node2D" unique_id=1280145541]
 script = ExtResource("1_ts4rt")
@@ -27,11 +18,17 @@ z_index = -10
 position = Vector2(570, 319)
 texture = ExtResource("2_rc0pn")
 
+[node name="Logo" type="Sprite2D" parent="." unique_id=654864793]
+position = Vector2(265, 82)
+texture = ExtResource("9_d6ul8")
+centered = false
+
 [node name="PaintArea" parent="." unique_id=1043497585 instance=ExtResource("3_e85df")]
 
 [node name="Snake" parent="." unique_id=117699337 instance=ExtResource("3_rc0pn")]
 unique_name_in_owner = true
 visible = false
+modulate = Color(1, 1, 1, 0.14509805)
 
 [node name="Food" parent="." unique_id=299069466 instance=ExtResource("4_h843c")]
 visible = false
@@ -39,73 +36,9 @@ visible = false
 [node name="UI" parent="." unique_id=316483432 instance=ExtResource("6_burlk")]
 unique_name_in_owner = true
 
-[node name="LevelManager" type="CanvasLayer" parent="." unique_id=166887724]
-unique_name_in_owner = true
-visible = false
-script = ExtResource("3_h843c")
-
-[node name="LevelDisplay" type="CenterContainer" parent="LevelManager" unique_id=992033951]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="LevelManager/LevelDisplay" unique_id=1131359087]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="LevelManager/LevelDisplay/VBoxContainer2" unique_id=1544830148]
-layout_mode = 2
-
-[node name="CenterPanel" type="Panel" parent="LevelManager/LevelDisplay/VBoxContainer2/CenterContainer" unique_id=1648630968]
-custom_minimum_size = Vector2(800, 100)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_auphx")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelManager/LevelDisplay/VBoxContainer2/CenterContainer" unique_id=835924776]
-layout_mode = 2
-
-[node name="LevelTextMain" type="Label" parent="LevelManager/LevelDisplay/VBoxContainer2/CenterContainer/VBoxContainer" unique_id=1690123461]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Level 1"
-horizontal_alignment = 1
-
-[node name="LevelTextSub" type="Label" parent="LevelManager/LevelDisplay/VBoxContainer2/CenterContainer/VBoxContainer" unique_id=1088393593]
-unique_name_in_owner = true
-layout_mode = 2
-text = "This is the challenge  for this level"
-horizontal_alignment = 1
-
-[node name="CountdownLabel" type="Label" parent="LevelManager/LevelDisplay/VBoxContainer2" unique_id=142622730]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "3"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="LevelManager/LevelDisplay/VBoxContainer2" unique_id=197901543]
-layout_mode = 2
-theme_override_constants/margin_top = 30
-
-[node name="NextLevelButton" type="Button" parent="LevelManager/LevelDisplay/VBoxContainer2/MarginContainer" unique_id=213759983]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "Click to play
-or hit SPACE"
-theme_override_font_sizes/font_size = 23
-text = "Next Level"
-
-[node name="LevelStartTimer" type="Timer" parent="LevelManager" unique_id=1992688134]
+[node name="LevelManager" parent="." unique_id=2007956018 instance=ExtResource("7_h0hye")]
 unique_name_in_owner = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1493767829]
 stream = ExtResource("8_h0hye")
 autoplay = true
-
-[connection signal="pressed" from="LevelManager/LevelDisplay/VBoxContainer2/MarginContainer/NextLevelButton" to="." method="_on_play_button_pressed"]
-[connection signal="timeout" from="LevelManager/LevelStartTimer" to="LevelManager" method="_on_level_start_timer_timeout"]

@@ -6,9 +6,9 @@
 script = ExtResource("1_3et5p")
 paint_area_width = 100
 paint_area_height = 60
-snake_speed = 120
+required_completion_percentage = 95.0
+snake_speed = 130
 snake_width = 10.0
 snake_width_growth_speed = 3.0
 challenge = "Cover most of the field."
-required_completion_percentage = 95.0
 metadata/_custom_type_script = "uid://dabl2n7348vfn"
