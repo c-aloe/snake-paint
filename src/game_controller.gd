@@ -82,7 +82,12 @@ func _enter_state(state: GameState):
 			_cleanup_level_session()
 			current_level += 1
 			level_data = level_manager.load_level(current_level)
-			level_manager.prepare_level(current_level, level_data)
+			if level_data == null:
+				level_data = level_manager.generate_random_level()
+				level_manager.prepare_level("Endless Mode", level_data)
+			else:
+				level_manager.prepare_level("Level %d" % current_level, level_data)
+				
 			if level_data.time_limit > 0:
 				TweenFX.heartbeat(time_challenge_label)
 			

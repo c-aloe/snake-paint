@@ -3,7 +3,8 @@ class_name LevelData
 
 enum RevealMode {
 	COLOR,
-	IMAGE
+	IMAGE,
+	RANDOM
 }
 
 #@export var level_scene: PackedScene

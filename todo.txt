@@ -1,27 +1,15 @@
 Snake todo
 
 Bugs/Issues:
-	In color mode, the image still shows at level end
-	Make a random mode when the levels end
 	
 Features:
-	New level concepts:
-		Implement reveal multiplier
-		Implement obstacles
-		Implement multiple paint areas
-		Implement different shaped paint areas (circle, polygon, shapes)
 	More levels
-	Menu where users can
-		- Set input controller (IP)
-		- Choose theme
 	Replay level option (choose level screen?)
-	Persistent Stats
-		- Fastest time, Best completion %, Longest snake,
-		  Total area painted lifetime
-	Explosive paint animation
+	Better paint animation
 	Adjust to a system where
 		- Always play the level to 100% fill
 		- Only "pass" if percent reached, replay if not
+			- Need better messages for meeting/not meeting the challenges
 		- Beating the time = bonus (see below)
 	On level completion reload the larger version to fix the ugly scale
 	Add sound effects
@@ -30,12 +18,24 @@ Features:
 	Explore better background music
 	Mute sound effects option
 	Better/more images
-	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
+	There's not a good level complete vibe - needs more animation and sounds
 	
 Code Improvements:
 	Spawn a new paintarea node for animation at level end
 
 Maybe Someday:
+	"Themes" - different image packs (i.e. Christmas, family photos (yeah, plug in yuor own), nature)
+	Persistent Stats
+		- Fastest time, Best completion %, Longest snake,
+		  Total area painted lifetime
+	Menu where users can
+		- Set input controller (IP)
+		- Choose theme
+	New level concepts:
+		Implement reveal multiplier
+		Implement obstacles
+		Implement multiple paint areas
+		Implement different shaped paint areas (circle, polygon, shapes)
 	Should beating time challenge increase reveal multiplier
 	   globally for more visual satisfaction?
 	Beating challenges could:

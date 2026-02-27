@@ -28,6 +28,13 @@ var snake: Snake
 var food: Food
 var paint_area: SnakePaintArea
 
+func set_level_data(data: LevelData) -> void:
+	if data == null:
+		push_error("Attempted to set null LevelData.")
+		return
+	
+	level_data = data
+
 func setup(data: LevelData) -> void:
 	random.randomize()
 	time = 0.0
@@ -50,20 +57,17 @@ func _create_components() -> void:
 
 func _configure_from_level_data() -> void:
 	# Setup paint area
-	paint_area.color_reveal_mode = level_data.reveal_mode == LevelData.RevealMode.COLOR
 	paint_area.setup(
 		level_data.paint_area_width,
-		level_data.paint_area_height
+		level_data.paint_area_height,
+		level_data.reveal_mode
 	)
 	paint_area.position = Vector2(
 		random.randi_range(0, window_size.x - paint_area.width),
 		random.randi_range(45, window_size.y - paint_area.height)	# 45 allows for UI at top
 	)
 	var texture := image_library.get_random_texture()
-	if texture:
-		paint_area.set_level_texture(texture)
-	else:
-		paint_area.color_reveal_mode = true
+	paint_area.set_level_texture(texture)
 
 	# Setup snake
 	snake.reset(

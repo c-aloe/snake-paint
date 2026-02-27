@@ -15,7 +15,6 @@ width = 0
 height = 0
 border_width = 4
 border_color = Color(0.261653, 0.30302396, 0.59735775, 1)
-color_reveal_mode = true
 
 [node name="MaskViewport" type="SubViewport" parent="." unique_id=2049362245]
 transparent_bg = true
